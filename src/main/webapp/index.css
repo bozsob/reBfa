@@ -1,3 +1,10 @@
 h1 {
     color: red;
 }
+tr, td, th {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+td {
+    padding: 10px;
+}
