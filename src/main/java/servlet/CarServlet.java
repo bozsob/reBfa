@@ -21,15 +21,26 @@ public class CarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-        String name = request.getParameter("name");
+        String brand = request.getParameter("brand");
         int year = Integer.parseInt(request.getParameter("year"));
         String color = request.getParameter("color");
         int tradingId = Integer.parseInt(request.getParameter("tradingId"));
+
+        System.out.println("brand: " + brand + "\nyear: " + year + "\ncolor" + color + "\ntradingId: " + tradingId);
 
         response.setContentType("application/json");
         ObjectMapper objectMapper = new ObjectMapper();
         DatabaseTradingDao dao = new DatabaseTradingDao(ConnectionUtil
             .getConnection(ConnectionUtil.DatabaseName.REBFA));
+
+        try {
+            Car car = dao.addNewCar(brand, year, color, tradingId);
+
+            objectMapper.writeValue(response.getOutputStream(), car);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

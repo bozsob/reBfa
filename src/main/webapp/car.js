@@ -12,7 +12,7 @@ $(document).ready(function() {
         success: function (data) {
             console.log(data);
 
-            var htmlString = "<table><tr>" +
+            var htmlString = "<table id='table'><tr>" +
                 "<th>Id</th>" +
                 "<th>Brand</th>" +
                 "<th>Year</th>" +
@@ -31,6 +31,32 @@ $(document).ready(function() {
             htmlString += "</table>";
             $("#cars").append(htmlString);
         }
+
+    })
+
+    $("#add").click(function () {
+
+        var brand = $("#brand").val();
+        var year = $("#year").val();
+        var color = $("#color").val();
+        var tradingId = getIdFromUrl();
+
+        $.ajax({
+            url: "/car",
+            type: "post",
+            data: {"brand":brand, "year":year, "color":color, "tradingId":tradingId},
+            success: function (data) {
+                console.log(data);
+
+                var newLine = "<tr><td>" + data.id + "</td>" +
+                    "<td>" + data.brand + "</td>" +
+                    "<td>" + data.year + "</td>" +
+                    "<td>" + data.color + "</td>" +
+                    "<td>" + data.tradingId + "</td>" +
+                    "</tr>";
+                $("#table").append(newLine);
+            }
+        })
 
     })
 

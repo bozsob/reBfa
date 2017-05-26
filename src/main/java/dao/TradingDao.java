@@ -11,6 +11,7 @@ public interface TradingDao {
     List<Trading> getAllTrading() throws SQLException;
     List<Car> getAllCars() throws SQLException;
     List<Car> getCarsByTrading(int tradingId) throws SQLException;
-    Car getNewCar(String brand, int year, String color, int tradingId) throws SQLException;
+    Car addNewCar(String brand, int year, String color, int tradingId) throws SQLException;
+    List<Car> getCars(String search) throws SQLException;
 
 }
